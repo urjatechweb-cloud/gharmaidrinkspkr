@@ -30,12 +30,12 @@ export default function MediaUpload({ value, onChange }: { value: string[]; onCh
           </div>
         ))}
       </div>
-      <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm cursor-pointer hover:border-gold/30">
+      <label className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/[0.08] border border-white/10 text-sm cursor-pointer hover:border-gold/30">
         {busy ? "Uploading…" : "+ Upload image(s)"}
         <input type="file" accept="image/*,video/*" multiple hidden onChange={(e) => upload(e.target.files)} />
       </label>
-      <p className="text-white/25 text-xs mt-1">Or paste a URL below.</p>
-      <input placeholder="https://…" onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); const v = (e.target as HTMLInputElement).value; if (v) { onChange([...value, v]); (e.target as HTMLInputElement).value = ""; } } }} className="w-full mt-1 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm focus:border-gold/40 focus:outline-none" />
+      <p className="text-white/80 text-xs mt-1">Or paste a URL below.</p>
+      <input placeholder="https://…" onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); const v = (e.target as HTMLInputElement).value; if (v) { onChange([...value, v]); (e.target as HTMLInputElement).value = ""; } } }} className="w-full mt-1 px-3 py-2 rounded-lg bg-white/[0.08] border border-white/10 text-sm focus:border-gold/40 focus:outline-none" />
     </div>
   );
 }

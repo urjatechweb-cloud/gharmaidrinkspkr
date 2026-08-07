@@ -4,7 +4,9 @@
 // Enums are stored as strings; array fields (images/tags) as JSON text.
 // ============================================================
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // "native" for local dev; the rhel target is what Netlify/AWS Lambda functions run on.
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {

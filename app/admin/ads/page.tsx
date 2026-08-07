@@ -33,7 +33,7 @@ export default function AdsAdmin() {
 
   const now = Date.now();
   const status = (ad: any) => {
-    if (!ad.active) return ["Inactive", "text-white/30"];
+    if (!ad.active) return ["Inactive", "text-white/65"];
     if (ad.startAt && new Date(ad.startAt).getTime() > now) return ["Scheduled", "text-blue-400"];
     if (ad.endAt && new Date(ad.endAt).getTime() < now) return ["Expired", "text-accent"];
     return ["Live", "text-green-400"];
@@ -42,7 +42,7 @@ export default function AdsAdmin() {
   return (
     <div className="p-6 sm:p-8">
       <div className="flex justify-between items-center mb-6">
-        <div><h1 className="text-2xl font-display font-bold">Ads & Banners</h1><p className="text-white/40 text-sm">Manage every promotional placement on the storefront</p></div>
+        <div><h1 className="text-2xl font-display font-bold">Ads & Banners</h1><p className="text-white/85 text-sm">Manage every promotional placement on the storefront</p></div>
         <button onClick={() => setEditing({ ...empty })} className="px-5 py-2.5 btn-gold rounded-xl text-sm">+ Create Ad</button>
       </div>
 
@@ -58,18 +58,18 @@ export default function AdsAdmin() {
                   <span className={`text-xs ${color}`}>● {label}</span>
                 </div>
                 <div className="font-semibold text-sm mb-0.5">{ad.title}</div>
-                <div className="text-white/40 text-xs mb-2 truncate">{ad.headline}</div>
-                <div className="text-white/30 text-[11px] mb-3">👁 {ad.impressions} · 🖱 {ad.clicks} clicks · CTR {ad.impressions ? Math.round((ad.clicks / ad.impressions) * 1000) / 10 : 0}%</div>
+                <div className="text-white/85 text-xs mb-2 truncate">{ad.headline}</div>
+                <div className="text-white/65 text-[11px] mb-3">👁 {ad.impressions} · 🖱 {ad.clicks} clicks · CTR {ad.impressions ? Math.round((ad.clicks / ad.impressions) * 1000) / 10 : 0}%</div>
                 <div className="flex gap-2 text-xs">
                   <button onClick={() => setEditing({ ...ad, startAt: toLocal(ad.startAt), endAt: toLocal(ad.endAt), headline: ad.headline || "", subtext: ad.subtext || "", buttonLabel: ad.buttonLabel || "", linkUrl: ad.linkUrl || "", mediaUrl: ad.mediaUrl || "", frequency: ad.frequency || "" })} className="text-gold hover:underline">Edit</button>
-                  <button onClick={() => toggle(ad)} className="text-white/50 hover:underline">{ad.active ? "Disable" : "Enable"}</button>
+                  <button onClick={() => toggle(ad)} className="text-white/75 hover:underline">{ad.active ? "Disable" : "Enable"}</button>
                   <button onClick={() => del(ad.id)} className="text-accent hover:underline">Delete</button>
                 </div>
               </div>
             </div>
           );
         })}
-        {ads.length === 0 && <p className="text-white/30 col-span-3 text-center py-12">No ads yet. Create your first promotion.</p>}
+        {ads.length === 0 && <p className="text-white/65 col-span-3 text-center py-12">No ads yet. Create your first promotion.</p>}
       </div>
 
       {editing && (
@@ -102,17 +102,17 @@ export default function AdsAdmin() {
               {/* Live preview */}
               {editing.headline && (
                 <div className="mt-2 p-4 rounded-xl border border-gold/20 bg-gold/5">
-                  <p className="text-white/30 text-[10px] uppercase mb-2">Live preview</p>
+                  <p className="text-white/65 text-[10px] uppercase mb-2">Live preview</p>
                   {editing.mediaUrl && <img src={editing.mediaUrl} alt="" className="w-full h-24 object-cover rounded-lg mb-2" />}
                   <div className="font-display font-bold gold-text">{editing.headline}</div>
-                  {editing.subtext && <div className="text-white/50 text-sm">{editing.subtext}</div>}
+                  {editing.subtext && <div className="text-white/75 text-sm">{editing.subtext}</div>}
                   {editing.buttonLabel && <span className="inline-flex mt-2 px-4 py-1.5 btn-gold rounded-full text-xs">{editing.buttonLabel}</span>}
                 </div>
               )}
             </div>
             <div className="flex gap-3 mt-6">
               <button onClick={save} className="flex-1 py-3 btn-gold rounded-xl">Save</button>
-              <button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10">Cancel</button>
+              <button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/[0.08] hover:bg-white/10">Cancel</button>
             </div>
           </div>
         </div>
@@ -123,5 +123,5 @@ export default function AdsAdmin() {
 }
 
 function F({ l, children }: { l: string; children: React.ReactNode }) {
-  return <div><label className="text-white/50 text-sm mb-1 block">{l}</label>{children}</div>;
+  return <div><label className="text-white/75 text-sm mb-1 block">{l}</label>{children}</div>;
 }

@@ -34,7 +34,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <Link href="/blog" className="text-gold text-sm hover:underline">← All posts</Link>
         <h1 className="text-3xl sm:text-5xl font-display font-black mt-4 mb-6">{post.title}</h1>
         {post.coverImage && <img src={post.coverImage} alt={post.title} className="w-full rounded-2xl mb-8" />}
-        <div className="prose prose-invert max-w-none text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: post.body }} />
+        <div className="prose prose-invert max-w-none text-white/85 leading-relaxed" dangerouslySetInnerHTML={{ __html: post.body }} />
       </article>
     </main>
   );

@@ -29,7 +29,7 @@ export default function BrandsAdmin() {
   return (
     <div className="p-6 sm:p-8">
       <div className="flex justify-between items-center mb-6">
-        <div><h1 className="text-2xl font-display font-bold">Brand Spotlight</h1><p className="text-white/40 text-sm">Feature & rotate different brands on the storefront</p></div>
+        <div><h1 className="text-2xl font-display font-bold">Brand Spotlight</h1><p className="text-white/85 text-sm">Feature & rotate different brands on the storefront</p></div>
         <button onClick={() => setEditing({ ...empty })} className="px-5 py-2.5 btn-gold rounded-xl text-sm">+ Add Brand</button>
       </div>
 
@@ -45,18 +45,18 @@ export default function BrandsAdmin() {
             <div className="p-4">
               <div className="flex items-center justify-between mb-1">
                 <span className="font-semibold text-sm">{b.name}</span>
-                <span className={`text-xs ${b.featured ? "text-green-400" : "text-white/30"}`}>{b.featured ? "● Featured" : "Hidden"}</span>
+                <span className={`text-xs ${b.featured ? "text-green-400" : "text-white/65"}`}>{b.featured ? "● Featured" : "Hidden"}</span>
               </div>
-              <div className="text-white/40 text-xs mb-3 truncate">{b.tagline || b.description}</div>
+              <div className="text-white/85 text-xs mb-3 truncate">{b.tagline || b.description}</div>
               <div className="flex gap-2 text-xs">
                 <button onClick={() => setEditing({ ...b, logo: b.logo || "", bannerImage: b.bannerImage || "", tagline: b.tagline || "", linkUrl: b.linkUrl || "" })} className="text-gold hover:underline">Edit</button>
-                <button onClick={() => toggle(b)} className="text-white/50 hover:underline">{b.featured ? "Unfeature" : "Feature"}</button>
+                <button onClick={() => toggle(b)} className="text-white/75 hover:underline">{b.featured ? "Unfeature" : "Feature"}</button>
                 <button onClick={() => del(b.id)} className="text-accent hover:underline">Delete</button>
               </div>
             </div>
           </div>
         ))}
-        {brands.length === 0 && <p className="text-white/30 col-span-3 text-center py-12">No brands yet. Add your first brand house.</p>}
+        {brands.length === 0 && <p className="text-white/65 col-span-3 text-center py-12">No brands yet. Add your first brand house.</p>}
       </div>
 
       {editing && (
@@ -79,7 +79,7 @@ export default function BrandsAdmin() {
                 <label className="flex items-center gap-2"><input type="checkbox" checked={editing.active} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} /> Active</label>
               </div>
             </div>
-            <div className="flex gap-3 mt-6"><button onClick={save} className="flex-1 py-3 btn-gold rounded-xl">Save</button><button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/5">Cancel</button></div>
+            <div className="flex gap-3 mt-6"><button onClick={save} className="flex-1 py-3 btn-gold rounded-xl">Save</button><button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/[0.08]">Cancel</button></div>
           </div>
         </div>
       )}
@@ -89,5 +89,5 @@ export default function BrandsAdmin() {
 }
 
 function F({ l, children }: { l: string; children: React.ReactNode }) {
-  return <div><label className="text-white/50 text-sm mb-1 block">{l}</label>{children}</div>;
+  return <div><label className="text-white/75 text-sm mb-1 block">{l}</label>{children}</div>;
 }

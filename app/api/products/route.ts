@@ -15,15 +15,20 @@ export async function GET(req: NextRequest) {
   const q = searchParams.get("q");
   const featured = searchParams.get("featured");
   const includeInactive = searchParams.get("admin") === "1";
+  if (includeInactive) {
+    // admin listing (includes hidden products) requires a signed-in editor
+    try { await requireAdmin("products"); } catch (e) { if (e instanceof Response) return e; }
+  }
 
   const where: any = {};
   if (!includeInactive) where.active = true;
   if (category && category !== "all") where.category = { slug: category };
   if (featured === "1") where.featured = true;
+  // SQLite: `contains` only (LIKE is case-insensitive for ASCII); no `mode`/`has` operators
   if (q) where.OR = [
-    { name: { contains: q, mode: "insensitive" } },
-    { description: { contains: q, mode: "insensitive" } },
-    { tags: { has: q } },
+    { name: { contains: q } },
+    { description: { contains: q } },
+    { tags: { contains: q } },
   ];
 
   if (searchParams.get("luxury") === "1") where.luxury = true;

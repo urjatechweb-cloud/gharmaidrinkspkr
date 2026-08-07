@@ -23,25 +23,25 @@ export default function PromotionsAdmin() {
   return (
     <div className="p-6 sm:p-8">
       <div className="flex justify-between items-center mb-6">
-        <div><h1 className="text-2xl font-display font-bold">Promotions & Coupons</h1><p className="text-white/40 text-sm">{promos.length} codes</p></div>
+        <div><h1 className="text-2xl font-display font-bold">Promotions & Coupons</h1><p className="text-white/85 text-sm">{promos.length} codes</p></div>
         <button onClick={() => setEditing({ ...empty })} className="px-5 py-2.5 btn-gold rounded-xl text-sm">+ New Coupon</button>
       </div>
       <div className="glass rounded-2xl overflow-x-auto">
         <table className="w-full text-sm min-w-[600px]">
-          <thead className="bg-white/5 text-white/50 text-left"><tr><th className="p-3">Code</th><th className="p-3">Type</th><th className="p-3">Value</th><th className="p-3">Min Order</th><th className="p-3">Used</th><th className="p-3">Status</th><th className="p-3"></th></tr></thead>
+          <thead className="bg-white/[0.08] text-white/75 text-left"><tr><th className="p-3">Code</th><th className="p-3">Type</th><th className="p-3">Value</th><th className="p-3">Min Order</th><th className="p-3">Used</th><th className="p-3">Status</th><th className="p-3"></th></tr></thead>
           <tbody>
             {promos.map((p) => (
-              <tr key={p.id} className="border-t border-white/5">
+              <tr key={p.id} className="border-t border-white/10">
                 <td className="p-3 font-mono font-bold gold-text">{p.code}</td>
-                <td className="p-3 text-white/50">{p.type}</td>
+                <td className="p-3 text-white/75">{p.type}</td>
                 <td className="p-3">{p.type === "PERCENT" ? p.value + "%" : "Rs. " + p.value}</td>
-                <td className="p-3 text-white/50">Rs. {p.minOrder}</td>
-                <td className="p-3 text-white/50">{p.usageCount}{p.usageLimit ? `/${p.usageLimit}` : ""}</td>
-                <td className="p-3">{p.active ? <span className="text-green-400 text-xs">Active</span> : <span className="text-white/30 text-xs">Off</span>}</td>
+                <td className="p-3 text-white/75">Rs. {p.minOrder}</td>
+                <td className="p-3 text-white/75">{p.usageCount}{p.usageLimit ? `/${p.usageLimit}` : ""}</td>
+                <td className="p-3">{p.active ? <span className="text-green-400 text-xs">Active</span> : <span className="text-white/65 text-xs">Off</span>}</td>
                 <td className="p-3 text-right whitespace-nowrap"><button onClick={() => setEditing({ ...p, usageLimit: p.usageLimit ?? "", startAt: toLocal(p.startAt), endAt: toLocal(p.endAt) })} className="text-gold hover:underline mr-3">Edit</button><button onClick={() => del(p.id)} className="text-accent hover:underline">Delete</button></td>
               </tr>
             ))}
-            {promos.length === 0 && <tr><td colSpan={7} className="p-8 text-center text-white/30">No coupons yet.</td></tr>}
+            {promos.length === 0 && <tr><td colSpan={7} className="p-8 text-center text-white/65">No coupons yet.</td></tr>}
           </tbody>
         </table>
       </div>
@@ -67,7 +67,7 @@ export default function PromotionsAdmin() {
               </div>
               <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={editing.active} onChange={(e) => setEditing({ ...editing, active: e.target.checked })} /> Active</label>
             </div>
-            <div className="flex gap-3 mt-6"><button onClick={save} className="flex-1 py-3 btn-gold rounded-xl">Save</button><button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/5">Cancel</button></div>
+            <div className="flex gap-3 mt-6"><button onClick={save} className="flex-1 py-3 btn-gold rounded-xl">Save</button><button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/[0.08]">Cancel</button></div>
           </div>
         </div>
       )}

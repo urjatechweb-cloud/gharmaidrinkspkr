@@ -10,6 +10,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const session = await getServerSession(authOptions);
   return (
     <Providers>
+      {/* The admin dashboard always uses the dark theme, regardless of the storefront toggle */}
+      <script dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.remove('light')` }} />
       {session ? (
         <div className="flex min-h-screen bg-dark">
           <Sidebar />

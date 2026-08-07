@@ -10,7 +10,9 @@
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
-    "db:reset": "prisma db push --force-reset && tsx prisma/seed.ts"
+    "db:reset": "prisma db push --force-reset && tsx prisma/seed.ts",
+    "db:postgres": "node scripts/set-db-provider.mjs postgresql",
+    "db:sqlite": "node scripts/set-db-provider.mjs sqlite"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

@@ -8,14 +8,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gold: "#D4AF37",
-        "gold-light": "#F5E6A9",
-        "gold-dark": "#B8960F",
-        dark: "#0A0A0A",
-        darker: "#050505",
-        "dark-card": "#111827",
-        accent: "#E11D48",
-        surface: "#0F0F0F",
+        // Brand golds & accent stay fixed across themes
+        gold: "#E8C766",
+        "gold-light": "#F7E9B0",
+        "gold-dark": "#C9A227",
+        accent: "#F43F5E",
+        // Theme-aware neutrals (driven by CSS variables in globals.css → light/dark)
+        dark: "rgb(var(--c-bg) / <alpha-value>)",
+        darker: "rgb(var(--c-bg-deep) / <alpha-value>)",
+        "dark-card": "rgb(var(--c-card) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        white: "rgb(var(--c-fg) / <alpha-value>)", // makes text-white/xx flip with the theme
       },
       fontFamily: {
         display: ["var(--font-playfair)", "serif"],

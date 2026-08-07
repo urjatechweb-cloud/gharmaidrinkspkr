@@ -43,29 +43,29 @@ export default function ProductsAdmin() {
   return (
     <div className="p-6 sm:p-8">
       <div className="flex justify-between items-center mb-6">
-        <div><h1 className="text-2xl font-display font-bold">Products</h1><p className="text-white/40 text-sm">{products.length} items</p></div>
+        <div><h1 className="text-2xl font-display font-bold">Products</h1><p className="text-white/85 text-sm">{products.length} items</p></div>
         <button onClick={() => setEditing({ ...empty })} className="px-5 py-2.5 btn-gold rounded-xl text-sm">+ Add Product</button>
       </div>
 
-      {loading ? <p className="text-white/40">Loading…</p> : (
+      {loading ? <p className="text-white/85">Loading…</p> : (
         <div className="glass rounded-2xl overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-white/5 text-white/50 text-left"><tr><th className="p-3">Product</th><th className="p-3">Category</th><th className="p-3">Price</th><th className="p-3">Badge</th><th className="p-3">Status</th><th className="p-3"></th></tr></thead>
+            <thead className="bg-white/[0.08] text-white/75 text-left"><tr><th className="p-3">Product</th><th className="p-3">Category</th><th className="p-3">Price</th><th className="p-3">Badge</th><th className="p-3">Status</th><th className="p-3"></th></tr></thead>
             <tbody>
               {products.map((p) => (
-                <tr key={p.id} className="border-t border-white/5">
+                <tr key={p.id} className="border-t border-white/10">
                   <td className="p-3 flex items-center gap-3">{p.images?.[0] && <img src={p.images[0]} className="w-9 h-9 rounded-lg object-cover" alt="" />}<span className="font-medium">{p.name}</span></td>
-                  <td className="p-3 text-white/50">{p.category?.name}</td>
+                  <td className="p-3 text-white/75">{p.category?.name}</td>
                   <td className="p-3 gold-text font-semibold">Rs. {p.price.toLocaleString()}</td>
-                  <td className="p-3"><span className="text-xs px-2 py-0.5 rounded-full bg-white/5">{p.badge}</span></td>
-                  <td className="p-3">{p.active ? <span className="text-green-400 text-xs">Active</span> : <span className="text-white/30 text-xs">Hidden</span>}</td>
+                  <td className="p-3"><span className="text-xs px-2 py-0.5 rounded-full bg-white/[0.08]">{p.badge}</span></td>
+                  <td className="p-3">{p.active ? <span className="text-green-400 text-xs">Active</span> : <span className="text-white/65 text-xs">Hidden</span>}</td>
                   <td className="p-3 text-right whitespace-nowrap">
                     <button onClick={() => setEditing({ ...p, compareAt: p.compareAt ?? "" })} className="text-gold hover:underline mr-3">Edit</button>
                     <button onClick={() => del(p.id)} className="text-accent hover:underline">Delete</button>
                   </td>
                 </tr>
               ))}
-              {products.length === 0 && <tr><td colSpan={6} className="p-8 text-center text-white/30">No products yet. Run the seed or add one.</td></tr>}
+              {products.length === 0 && <tr><td colSpan={6} className="p-8 text-center text-white/65">No products yet. Run the seed or add one.</td></tr>}
             </tbody>
           </table>
         </div>
@@ -110,7 +110,7 @@ export default function ProductsAdmin() {
             </div>
             <div className="flex gap-3 mt-6">
               <button onClick={save} className="flex-1 py-3 btn-gold rounded-xl">Save</button>
-              <button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10">Cancel</button>
+              <button onClick={() => setEditing(null)} className="px-6 py-3 rounded-xl bg-white/[0.08] hover:bg-white/10">Cancel</button>
             </div>
           </div>
         </div>
@@ -121,5 +121,5 @@ export default function ProductsAdmin() {
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return <div><label className="text-white/50 text-sm mb-1 block">{label}</label>{children}</div>;
+  return <div><label className="text-white/75 text-sm mb-1 block">{label}</label>{children}</div>;
 }

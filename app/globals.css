@@ -2,47 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: dark; }
+/* ===== THEME TOKENS (R G B triplets, consumed by Tailwind colors) ===== */
+:root {
+  --c-bg: 10 10 10;        /* dark base bg */
+  --c-bg-deep: 5 5 5;      /* darker */
+  --c-card: 23 28 47;      /* cards */
+  --c-surface: 20 20 20;   /* alt surface */
+  --c-fg: 255 255 255;     /* foreground text */
+  --glass-bg: 255 255 255; /* glass tint base */
+  color-scheme: dark;
+}
+html.light {
+  --c-bg: 250 249 246;     /* warm cream */
+  --c-bg-deep: 255 255 255;
+  --c-card: 255 255 255;
+  --c-surface: 244 241 235;
+  --c-fg: 26 22 17;        /* near-black warm */
+  --glass-bg: 20 16 10;    /* dark tint on light surfaces */
+  color-scheme: light;
+}
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
-  background: #0a0a0a;
-  color: #fff;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-fg));
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-::selection { background: rgba(212, 175, 55, 0.3); color: #fff; }
+::selection { background: rgba(232, 199, 102, 0.35); color: rgb(var(--c-fg)); }
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #d4af37, #b8960f); border-radius: 10px; }
+::-webkit-scrollbar-track { background: rgb(var(--c-bg)); }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #e8c766, #c9a227); border-radius: 10px; }
 
 @layer components {
   .glass {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgb(var(--glass-bg) / 0.05);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgb(var(--glass-bg) / 0.12);
   }
   .gold-text {
-    background: linear-gradient(135deg, #d4af37, #f5e6a9);
+    background: linear-gradient(135deg, #e8c766, #f7e9b0);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   .btn-gold {
-    background: linear-gradient(135deg, #d4af37, #b8960f);
+    background: linear-gradient(135deg, #e8c766, #c9a227);
     color: #0a0a0a;
     font-weight: 700;
     transition: all 0.3s;
   }
-  .btn-gold:hover { box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); transform: scale(1.03); }
+  .btn-gold:hover { box-shadow: 0 10px 30px rgba(232, 199, 102, 0.35); transform: scale(1.03); }
   .hide-scrollbar::-webkit-scrollbar { display: none; }
   .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
+/* Deeper gold for contrast on the light theme */
+html.light .gold-text { background: linear-gradient(135deg, #b8860b, #9a6f08); -webkit-background-clip: text; background-clip: text; }
+html.light .glass { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
 
-/* Reveal-on-scroll utility (used by Framer Motion fallback) */
+/* Reveal-on-scroll utility */
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
 .reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ===== Animated "beer pour" ambient background ===== */
+.beer-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1; /* above section backgrounds, below z-10 content wrappers & chrome */
+  pointer-events: none;
+  overflow: hidden;
+}
+/* Pouring stream from top, gentle amber glow */
+.beer-bg .pour {
+  position: absolute;
+  top: -12%;
+  left: 8%;
+  width: 3px;
+  height: 42%;
+  background: linear-gradient(to bottom, rgba(232,199,102,0), rgba(232,199,102,0.5), rgba(201,162,39,0.35));
+  filter: blur(1px);
+  transform-origin: top center;
+  animation: pour-sway 7s ease-in-out infinite;
+  opacity: 0.5;
+}
+.beer-bg .pour.p2 { left: auto; right: 12%; height: 34%; animation-delay: 2.5s; opacity: 0.35; }
+@keyframes pour-sway { 0%,100% { transform: rotate(-2deg) scaleY(1); } 50% { transform: rotate(2deg) scaleY(1.05); } }
+
+/* Rising bubbles (beer/champagne fizz) */
+.beer-bg .bubble {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(247,233,176,0.55), rgba(232,199,102,0.18));
+  box-shadow: 0 0 6px rgba(232,199,102,0.25);
+  animation: bubble-rise linear infinite;
+}
+html.light .beer-bg .bubble { background: radial-gradient(circle at 30% 30%, rgba(201,162,39,0.35), rgba(184,134,11,0.12)); box-shadow: none; }
+html.light .beer-bg .pour { opacity: 0.25; }
+@keyframes bubble-rise {
+  0%   { transform: translateY(0) translateX(0) scale(0.6); opacity: 0; }
+  8%   { opacity: 0.7; }
+  70%  { opacity: 0.5; }
+  100% { transform: translateY(-108vh) translateX(24px) scale(1.15); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beer-bg { display: none; }
+}
