@@ -1,0 +1,14 @@
+---
+# cPanel Git Version Control deployment file.
+#
+# Our "Application Root" in Setup Node.js App points directly at this
+# repository's checkout folder, so there's nothing to copy elsewhere —
+# the files are already in the right place the moment cPanel pulls this
+# commit. This file only exists so the "Deploy HEAD Commit" button has a
+# valid, safe task to run (cPanel requires a .cpanel.yml to deploy at all).
+#
+# After deploying, use cPanel's "Setup Node.js App" page to run
+# "npm install", then "npm run build" in the app's terminal, then Restart.
+deployment:
+  tasks:
+    - /bin/echo "Gharmai Drinks: repository checkout is up to date. Now run 'Run NPM Install' + 'npm run build' from Setup Node.js App."
