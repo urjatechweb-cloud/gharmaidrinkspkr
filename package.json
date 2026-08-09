@@ -2,10 +2,15 @@
   "name": "gharmai-platform",
   "version": "1.0.0",
   "private": true,
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "scripts": {
     "dev": "next dev -p 3470",
     "build": "prisma generate && next build",
     "start": "next start -p 3470",
+    "cpanel:start": "node server.js",
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
