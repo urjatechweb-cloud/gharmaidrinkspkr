@@ -140,6 +140,7 @@ async function main() {
     { title: "Top Bar — Free Delivery", headline: "🚚 Free delivery on orders above Rs. 2,000 — every day till 3 AM!", placement: "TOP_BAR", priority: 5 },
     { title: "Mid-Page — Party Box Campaign", headline: "Throwing a Party?", subtext: "Build your own party box and save big", buttonLabel: "Build Box", linkUrl: "#specials", placement: "MID_PAGE", mediaUrl: "https://images.unsplash.com/photo-1496843916299-590492c751f4?w=1200" },
     { title: "Popup — First Order Offer", headline: "Get 10% Off Your First Order", subtext: "Use code WELCOME10 at checkout", buttonLabel: "Order Now", linkUrl: "#menu", placement: "POPUP", frequency: "once_per_session" },
+    { title: "Popup — Thamel Beer Night", headline: "🍺 Thamel Beer Night", subtext: "Ice-cold beer delivered to your door — order now and save", buttonLabel: "Order Beer", linkUrl: "/menu", placement: "POPUP", priority: 1, frequency: "once_per_session", mediaUrl: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=1200" },
   ];
   for (const b of banners) {
     const exists = await prisma.bannerAd.findFirst({ where: { title: b.title } });
